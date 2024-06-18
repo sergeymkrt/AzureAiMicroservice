@@ -1,0 +1,6 @@
+@AzureAiMicroservice_HostAddress = http://localhost:5130
+
+GET {{AzureAiMicroservice_HostAddress}}/weatherforecast/
+Accept: application/json
+
+###
