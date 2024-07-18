@@ -3,17 +3,18 @@ using FastEndpoints;
 
 namespace AzureAiMicroservice.Endpoints;
 
-public class AzureDevopsEndpoint(AzureDevopsService devopsService, JiraService jiraService) : EndpointWithoutRequest
+public class JiraEndpoint(JiraService jiraService) : EndpointWithoutRequest
 {
     public override void Configure()
     {
-        Post("/api/tasks");
+        Post("tasks");
         AllowAnonymous();
     }
     
     public override async Task HandleAsync(CancellationToken ct)
     {
-        await jiraService.GetTasks();
-        await SendOkAsync("Azure DevOps endpoint", ct);
+        var stream = await jiraService.GetTasks(50);
+        await SendStreamAsync(stream, "trainData.json", cancellation: ct);
     }
 }
+

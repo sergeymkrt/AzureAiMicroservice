@@ -24,7 +24,10 @@ var app = builder.Build();
 app.UseHttpsRedirection();
 
 app
-   .UseFastEndpoints()
+   .UseFastEndpoints(c =>
+   {
+       c.Endpoints.RoutePrefix = "api";
+   })
    .UseSwaggerGen();
 
 app.Run();

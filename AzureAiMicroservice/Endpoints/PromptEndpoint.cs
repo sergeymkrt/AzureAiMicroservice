@@ -9,7 +9,7 @@ public class PromptEndpoint(AzureAIService azureAiService) : Endpoint<MessageMod
 {
     public override void Configure()
     {
-        Post("/api/prompt");
+        Post("prompt");
         PreProcessor<SecretKeyAuthPreProcessor>();
     }
     
