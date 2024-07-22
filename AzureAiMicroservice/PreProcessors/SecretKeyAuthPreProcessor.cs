@@ -4,7 +4,7 @@ using FluentValidation.Results;
 
 namespace AzureAiMicroservice.PreProcessors;
 
-public class SecretKeyAuthPreProcessor : IPreProcessor<MessageModel>
+public class SecretKeyAuthPreProcessor<TRequest> : IPreProcessor<TRequest>
 {
     private readonly string _secretKey;
 
@@ -13,7 +13,7 @@ public class SecretKeyAuthPreProcessor : IPreProcessor<MessageModel>
         _secretKey = configuration["SecretKey"];
     }
     
-    public async Task PreProcessAsync(IPreProcessorContext<MessageModel> context, CancellationToken ct)
+    public async Task PreProcessAsync(IPreProcessorContext<TRequest> context, CancellationToken ct)
     {
         if (!context.HttpContext.Request.Headers.TryGetValue("Authorization", out var extractedSecretKey))
         {
